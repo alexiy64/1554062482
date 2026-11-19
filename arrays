@@ -1,20 +1,27 @@
+// Отключает ошибку безопасности scanf в Visual Studio (C++)
+#define _CRT_SECURE_NO_WARNINGS 
+
 #include <stdio.h>
 #include <stdlib.h>
 
 int main(void) {
-    // Исходный массив
     int k;
-    printf("Сколько чисел? ");
+    printf("Сколько чисел будет в массиве? ");
     scanf("%d", &k);
 
-    // Заказываем памяь
-    int *arr = malloc(k * sizeof(int)); 
+    if (k < 0) {
+        printf("Число неверное!");
+    }
+
+    // выделение памяти
+    int* arr = (int*)malloc(k * sizeof(int));
 
     if (arr == NULL) {
         printf("Ошибка: не хватило памяти!\n");
         return 1;
     }
 
+    printf("Введите %d чисел:\n", k);
     for (int i = 0; i < k; i++) {
         scanf("%d", &arr[i]);
     }
@@ -23,19 +30,13 @@ int main(void) {
     for (int i = 0; i < k; i++) {
         printf("%d ", arr[i]);
     }
-    printf("\k");
 
-    //Сортировка
-    
-    // Внешний цикл: сколько раз мы проходим по массиву
+    printf("\n");
+
+    // Сортировка
     for (int i = 0; i < k - 1; i++) {
-        
-        // Внутренний цикл: сравниваем соседние элементы
-        // n - i - 1 нужно, чтобы не проверять элементы, которые уже в конце
         for (int j = 0; j < k - i - 1; j++) {
-            
             if (arr[j] > arr[j + 1]) {
-                // Bременная переменная
                 int temp = arr[j];
                 arr[j] = arr[j + 1];
                 arr[j + 1] = temp;
@@ -43,16 +44,14 @@ int main(void) {
         }
     }
 
-    //Конец сортировки
-
     printf("Отсортированный массив: ");
     for (int i = 0; i < k; i++) {
         printf("%d ", arr[i]);
     }
+
     printf("\n");
 
-    //возвращаем память
+    // Освобождение памяти
     free(arr);
-
     return 0;
 }
