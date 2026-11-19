@@ -7,7 +7,7 @@ int main(void) {
     printf("Сколько чисел? ");
     scanf("%d", &k);
 
-    // Заказываем память
+    // Заказываем памяь
     int *arr = malloc(k * sizeof(int)); 
 
     if (arr == NULL) {
@@ -38,7 +38,7 @@ int main(void) {
         for (int j = 0; j < k - i - 1; j++) {
             
             if (arr[j] > arr[j + 1]) {
-                // Временная переменная
+                // Bременная переменная
                 int temp = arr[j];
                 arr[j] = arr[j + 1];
                 arr[j + 1] = temp;
